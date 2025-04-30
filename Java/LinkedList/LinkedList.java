@@ -8,7 +8,16 @@ class LinkedList
         this.root = null;
         this.Size = 0;
     }
-
+    private Node reverseRecurse (Node actNode)
+    {
+        if(actNode.getNext() == null)
+        {
+            this.root = actNode;
+            return actNode;
+        }
+        reverseRecurse(actNode.getNext()).setNext(actNode);
+        return actNode;
+    }
     void pushFront(int value)
     {
         Node newOne = new Node(value, this.root);
@@ -55,7 +64,10 @@ class LinkedList
         }
         Size--;
     }
-
+    void reverse ()
+    {
+        reverseRecurse(this.root).setNext(null);
+    }
     void showList()
     {
         Node actNode = this.root;
@@ -64,6 +76,6 @@ class LinkedList
             System.out.print(actNode.getValue() + " ");
             actNode = actNode.getNext();
         }
-        System.out.print(actNode.getValue());
+        System.out.println(actNode.getValue());
     }
 }
